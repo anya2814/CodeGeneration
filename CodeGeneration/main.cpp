@@ -1,8 +1,6 @@
 #include <QCoreApplication>
 
-#include <classunit.h>
-#include <methodunit.h>
-#include <printoperatorunit.h>
+#include <unit.h>
 
 std::string generateProgram() {
     ClassUnit myClass( "MyClass" );

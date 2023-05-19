@@ -15,13 +15,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    classunit.cpp \
     unit.cpp \
-    methodunit.cpp \
-    printoperatorunit.cpp
+    cpp.cpp \
+    csharp.cpp \
+    java.cpp \
+    codegeneration.cpp
 
 HEADERS += \
-    classunit.h \
     unit.h \
-    methodunit.h \
-    printoperatorunit.h
+    cpp.h \
+    csharp.h \
+    java.h \
+    codegeneration.h

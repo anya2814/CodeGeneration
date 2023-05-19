@@ -1,6 +1,6 @@
 #ifndef METHODUNIT_H
 #define METHODUNIT_H
-
+/*
 #include <vector>
 #include <unit.h>
 
@@ -17,7 +17,7 @@ public:
 flags ) :
         m_name( name ), m_returnType( returnType ), m_flags( flags ) { }
 
-    void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 );
+    void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ /*= 0 );
     std::string compile( unsigned int level = 0 ) const;
 
 private:
@@ -26,5 +26,5 @@ private:
     Flags m_flags;
     std::vector< std::shared_ptr< Unit > > m_body;
  };
-
+*/
 #endif // METHODUNIT_H
