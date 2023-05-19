@@ -32,23 +32,22 @@ class ClassUnit : public Unit
 {
 public:
      enum AccessModifier {
+     DEFAULT,
      PUBLIC,
+     PROTECTED_INTERNAL,
+     INTERNAL,
      PROTECTED,
+     FILE,
+     PRIVATE_PROTECTED,
      PRIVATE
      };
 
 public:
-     static const std::vector< std::string > ACCESS_MODIFIERS;
+     virtual void add( const std::shared_ptr< Unit >& unit, Flags flags );
 
-     explicit ClassUnit( const std::string& name ) : m_name( name ) {
-        m_fields.resize( ACCESS_MODIFIERS.size() );
-     }
+     virtual std::string compile( unsigned int level = 0) const;
 
-     void add( const std::shared_ptr< Unit >& unit, Flags flags );
-
-     std::string compile( unsigned int level = 0) const;
-
-private:
+protected:
      std::string m_name;
      using Fields = std::vector< std::shared_ptr< Unit > >;
 
@@ -62,18 +61,16 @@ public:
     enum Modifier {
         STATIC = 1,
         CONST = 1 << 1,
-        VIRTUAL = 1 << 2
+        VIRTUAL = 1 << 2,
+        FINAL = 1 << 3,
+        ABSTRACT = 1 << 4
     };
 
 public:
-    MethodUnit( const std::string& name, const std::string& returnType, Flags
-flags ) :
-        m_name( name ), m_returnType( returnType ), m_flags( flags ) { }
-
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 );
-    std::string compile( unsigned int level = 0 ) const;
+    virtual std::string compile( unsigned int level = 0 ) const;
 
-private:
+protected:
     std::string m_name;
     std::string m_returnType;
     Flags m_flags;
@@ -84,11 +81,9 @@ private:
 
 class PrintOperatorUnit : public Unit {
 public:
-    explicit PrintOperatorUnit( const std::string& text ) : m_text( text ) { };
+    virtual std::string compile( unsigned int level = 0 ) const;
 
-    std::string compile( unsigned int level = 0 ) const;
-
-private:
+protected:
     std::string m_text;
 };
 
