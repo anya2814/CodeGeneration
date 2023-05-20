@@ -16,7 +16,7 @@ public:
     virtual std::string compile( unsigned int level = 0 ) const = 0;
 
 protected:
-    virtual std::string generateShift( unsigned int level ) const  {
+    virtual std::string generateShift( unsigned int level ) const {
         static const auto DEFAULT_SHIFT = "    ";
         std::string result;
         for( unsigned int i = 0; i < level; ++i ) {
@@ -43,9 +43,14 @@ public:
      };
 
 public:
-     virtual void add( const std::shared_ptr< Unit >& unit, Flags flags );
+     static const std::vector< std::string > ACCESS_MODIFIERS;
 
-     virtual std::string compile( unsigned int level = 0) const;
+     explicit ClassUnit( const std::string& name ) : m_name( name ) {
+         m_fields.resize( ACCESS_MODIFIERS.size() );
+     }
+
+     std::string compile( unsigned int level = 0) const { };
+     void add( const std::shared_ptr< Unit >& unit, Flags flags );
 
 protected:
      std::string m_name;
@@ -63,12 +68,17 @@ public:
         CONST = 1 << 1,
         VIRTUAL = 1 << 2,
         FINAL = 1 << 3,
-        ABSTRACT = 1 << 4
+        ABSTRACT = 1 << 4,
+        EXTERN = 1 << 5
     };
 
 public:
+    MethodUnit( const std::string& name, const std::string& returnType, Flags
+flags ) :
+        m_name( name ), m_returnType( returnType ), m_flags( flags ) { }
+
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 );
-    virtual std::string compile( unsigned int level = 0 ) const;
+    std::string compile( unsigned int level = 0 ) const;
 
 protected:
     std::string m_name;
@@ -81,7 +91,7 @@ protected:
 
 class PrintOperatorUnit : public Unit {
 public:
-    virtual std::string compile( unsigned int level = 0 ) const;
+    explicit PrintOperatorUnit( const std::string& text ) : m_text( text ) { }
 
 protected:
     std::string m_text;
