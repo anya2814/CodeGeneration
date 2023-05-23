@@ -19,7 +19,7 @@ void MethodUnit::add( const std::shared_ptr< Unit >& unit, Flags /* flags */ ) {
 }
 
 std::string MethodUnit::compile( unsigned int level ) const {
-    std::string result = generateShift( level );
+    std::string result = "";
     if( m_flags & STATIC ) {
         result += "static ";
     } else if( m_flags & VIRTUAL ) {
@@ -32,7 +32,7 @@ std::string MethodUnit::compile( unsigned int level ) const {
     }
     result += m_returnType + " ";
     result += m_name + "()";
-    if( m_flags & CONST ) {
+    if( m_flags & CONST ) {         // нужно чтобы был не static!!!
         result += " const";
     } else if( m_flags & FINAL ) {
         result += " final";
@@ -44,4 +44,5 @@ std::string MethodUnit::compile( unsigned int level ) const {
     result += generateShift( level ) + "}\n";
     return result;
 }
+hello
 

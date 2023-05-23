@@ -7,7 +7,7 @@ std::string ClassCpp::compile( unsigned int level ) const
         if( m_fields[ i ].empty() ) {
             continue;
         }
-        result += ACCESS_MODIFIERS[ i ] + ":\n";
+        result += ACCESS_MODIFIERS[ i ] + ":\n" + generateShift( level + 1 );
         for( const auto& f : m_fields[ i ] ) {
             result += f->compile( level + 1 );
         }
@@ -17,6 +17,33 @@ std::string ClassCpp::compile( unsigned int level ) const
     result += generateShift( level ) + "};\n";
     return result;
 }
+
+/*std::string MethodCpp::compile( unsigned int level ) const {
+    std::string result = generateShift( level );
+    if( m_flags & STATIC ) {
+        result += "static ";
+    } else if( m_flags & VIRTUAL ) {
+        result += "virtual ";
+    } else if( m_flags & ABSTRACT) {
+        result += "abstract ";
+    }
+    if( m_flags & EXTERN) {
+        result += "extern ";
+    }
+    result += m_returnType + " ";
+    result += m_name + "()";
+    if( m_flags & CONST ) {
+        result += " const";
+    } else if( m_flags & FINAL ) {
+        result += " final";
+    }
+    result += " {\n";
+    for( const auto& b : m_body ) {
+        result += b->compile( level + 1 );
+    }
+    result += generateShift( level ) + "}\n";
+    return result;
+}*/
 
 std::string PrintOperatorCpp::compile( unsigned int level ) const {
     return generateShift( level ) + "printf( \"" + m_text + "\" );\n";
