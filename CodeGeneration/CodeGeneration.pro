@@ -19,11 +19,13 @@ SOURCES += main.cpp \
     cpp.cpp \
     csharp.cpp \
     java.cpp \
-    codegeneration.cpp
+    codegeneration.cpp \
+    generateprogram.cpp
 
 HEADERS += \
     unit.h \
     cpp.h \
     csharp.h \
     java.h \
-    codegeneration.h
+    codegeneration.h \
+    generateprogram.h

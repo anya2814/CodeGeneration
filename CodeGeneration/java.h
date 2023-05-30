@@ -13,7 +13,7 @@ public:
 
 class MethodJava : public MethodUnit {
 public:
-    MethodJava( const std::string& name, const std::string& returnType, Flags
+    explicit MethodJava( const std::string& name, const std::string& returnType, Flags
                flags ) : MethodUnit(name, returnType, flags) { }
  };
 

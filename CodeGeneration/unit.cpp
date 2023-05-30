@@ -44,5 +44,4 @@ std::string MethodUnit::compile( unsigned int level ) const {
     result += generateShift( level ) + "}\n";
     return result;
 }
-hello
 

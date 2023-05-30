@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     CodeGenerationCpp obj1;
-    CodeGenerationCsharp obj2;
+    //CodeGenerationCsharp obj2;
     //CodeGenerationJava obj3;
 
     std::cout << obj1.generateProgram() << std::endl << std::endl;

@@ -13,7 +13,7 @@ public:
 
 class MethodCpp : public MethodUnit {
 public:
-    MethodCpp( const std::string& name, const std::string& returnType, Flags
+    explicit MethodCpp( const std::string& name, const std::string& returnType, Flags
                flags ) : MethodUnit(name, returnType, flags) { }
  };
 

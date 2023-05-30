@@ -13,7 +13,7 @@ public:
 
 class MethodCsharp : public MethodUnit {
 public:
-    MethodCsharp( const std::string& name, const std::string& returnType, Flags
+    explicit MethodCsharp( const std::string& name, const std::string& returnType, Flags
                flags ) : MethodUnit(name, returnType, flags) { }
  };
 
