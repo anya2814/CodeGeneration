@@ -15,6 +15,7 @@ class MethodJava : public MethodUnit {
 public:
     explicit MethodJava( const std::string& name, const std::string& returnType, Flags      // конструктор
                flags ) : MethodUnit(name, returnType, flags) { }
+    std::string compile( unsigned int level = 0 ) const;                                    // генерирование кода функции
  };
 
 

@@ -85,8 +85,6 @@ flags ) :
 
     // добавление в функцию содержимого
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 ) ;
-    // генерирование кода функции
-    std::string compile( unsigned int level = 0 ) const;
 
 protected:
     std::string m_name;                             // имя функции

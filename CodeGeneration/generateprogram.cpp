@@ -1,99 +1,137 @@
 #include "generateprogram.h"
+#include <QDebug>
 
-std::string GenerateProgram::generate(const CodeGeneration *genLang) {
+const std::vector< std::string > GenerateProgram::LANGUAGE_NAMES = { "C++", "C#", "Java"};
 
-    auto myClass = std::make_shared<ClassUnit>( genLang->GetClass( "MyClass" ) );
+// для кода C++
+/*std::string GenerateProgram::generate(language lang) {
+
+    CodeGeneration *genLang;
+    std::string className = "MyClass";
+    switch (lang) {
+        case 0:
+            genLang = new CodeGenerationCpp;
+            className += LANGUAGE_NAMES[0];  break;
+        case 1:
+            genLang = new CodeGenerationCsharp;
+            className += LANGUAGE_NAMES[1];  break;
+        case 2:
+            genLang = new CodeGenerationJava;
+            className += LANGUAGE_NAMES[2];  break;
+        default:
+            return "This language is not supported or incorrect name.\n"; break;
+    }
+
+    auto myClass = genLang->GetClass( className );
     myClass->add(
-                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc1", "void", 0 ) ),
+                genLang->GetMethod( "testFunc1", "void", 0 ),
                 ClassUnit::PUBLIC
                 );
     myClass->add(
-                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc2", "void", MethodUnit::STATIC ) ),
+                genLang->GetMethod( "testFunc2", "void", MethodUnit::STATIC ),
                 ClassUnit::PRIVATE
                 );
     myClass->add(
-                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ) ),
-                ClassCpp::PUBLIC
+                genLang->GetMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
+                ClassUnit::PUBLIC
                 );
 
-    auto method = std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc4", "void", MethodUnit::STATIC ) );
-    method->add( std::make_shared< PrintOperatorUnit >( genLang->GetPrintOperator( R"(Hello, world!\n)" ) ) );
+    auto method = genLang->GetMethod( "testFunc4", "void", MethodUnit::STATIC );
+    method->add( genLang->GetPrintOperator( R"(Hello, world!\n)" ) );
     myClass->add( method, ClassUnit::PROTECTED );
+    delete genLang;
+    return myClass->compile();
+}*/
+
+// для кода C#
+std::string GenerateProgram::generate(language lang) {
+
+    CodeGeneration *genLang;
+    std::string className = "MyClass";
+    switch (lang) {
+        case 0:
+            genLang = new CodeGenerationCpp;
+            className += LANGUAGE_NAMES[0]; break;
+        case 1:
+            genLang = new CodeGenerationCsharp;
+            className += LANGUAGE_NAMES[1]; break;
+        case 2:
+            genLang = new CodeGenerationJava;
+            className += LANGUAGE_NAMES[2]; break;
+        default:
+            return "This language is not supported or incorrect name.\n"; break;
+    }
+
+    auto myClass = genLang->GetClass( className );
+    myClass->add(
+                genLang->GetMethod( "testFunc1", "void", 0 ),
+                ClassUnit::PRIVATE_PROTECTED
+                );
+    myClass->add(
+                genLang->GetMethod( "testFunc2", "void", MethodUnit::STATIC ),
+                ClassUnit::PRIVATE
+                );
+    myClass->add(
+                genLang->GetMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
+                ClassUnit::PUBLIC
+                );
+    myClass->add(
+                genLang->GetMethod( "testFunc4", "void", MethodUnit::STATIC | MethodUnit::EXTERN ),
+                ClassUnit::FILE
+                );
+    myClass->add(
+                genLang->GetMethod( "testFunc5", "void", MethodUnit::ABSTRACT | MethodUnit::CONST ),
+                ClassUnit::PROTECTED
+                );
+    myClass->add(
+                genLang->GetMethod( "testFunc6", "void", MethodUnit::CONST ),
+                ClassUnit::INTERNAL
+                );
+
+    auto method = genLang->GetMethod( "testFunc7", "void", MethodUnit::STATIC );
+    method->add( genLang->GetPrintOperator( R"(Hello, world!)" ) );
+    myClass->add( method, ClassUnit::PROTECTED_INTERNAL );
+    delete genLang;
     return myClass->compile();
 }
 
-/*std::string CodeGenerationCpp::generateProgram() {
-    ClassCpp myClass( "MyClassC++" );
-    myClass.add(
-                std::make_shared< MethodCpp > ( "testFunc1", "void", 0 ),
-                ClassCpp::PUBLIC
-                );
-    myClass.add(
-                std::make_shared< MethodCpp >( "testFunc2", "void", MethodCpp::STATIC ),
-                ClassCpp::PRIVATE
-                );
-    myClass.add(
-                std::make_shared< MethodCpp >( "testFunc3", "void", MethodCpp::VIRTUAL | MethodCpp::CONST ),
-                ClassCpp::PUBLIC
-                );
+// для кода Java
+/*std::string GenerateProgram::generate(language lang) {
 
-    auto method = std::make_shared< MethodCpp >( "testFunc4", "void", MethodCpp::STATIC );
-    method->add( std::make_shared< PrintOperatorCpp >( R"(Hello, world!\n)" ) );
-    myClass.add( method, ClassCpp::PROTECTED );
-    return myClass.compile();
-}
+    CodeGeneration *genLang;
+    std::string className = "MyClass";
+    switch (lang) {
+        case 0:
+            genLang = new CodeGenerationCpp;
+            className += LANGUAGE_NAMES[0]; break;
+        case 1:
+            genLang = new CodeGenerationCsharp;
+            className += LANGUAGE_NAMES[1]; break;
+        case 2:
+            genLang = new CodeGenerationJava;
+            className += LANGUAGE_NAMES[2]; break;
+        default:
+            return "This language is not supported or incorrect name.\n"; break;
+    }
 
-std::string CodeGenerationCsharp::generateProgram() {
-    ClassCsharp myClassCsharp( "MyClassC#" );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp > ( "testFunc1", "void", 0 ),
-                ClassCsharp::PRIVATE_PROTECTED
+    auto myClass = genLang->GetClass( className );
+    myClass->add(
+                genLang->GetMethod( "testFunc1", "void", 0 ),
+                ClassUnit::DEFAULT
                 );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp >( "testFunc2", "void", MethodCsharp::STATIC ),
-                ClassCsharp::PRIVATE
-                );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp >( "testFunc3", "void", MethodCsharp::VIRTUAL | MethodCsharp::CONST ),
-                ClassCsharp::PUBLIC
-                );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp >( "testFunc4", "void", MethodCsharp::STATIC | MethodCsharp::EXTERN ),
-                ClassCsharp::FILE
-                );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp >( "testFunc5", "void", MethodCsharp::ABSTRACT | MethodCsharp::CONST ),
-                ClassCpp::PUBLIC
-                );
-    myClassCsharp.add(
-                std::make_shared< MethodCsharp >( "testFunc6", "void", MethodCsharp::CONST ),
-                ClassCsharp::INTERNAL
-                );
-
-    auto method = std::make_shared< MethodCsharp >( "testFunc7", "void", MethodCsharp::STATIC );
-    method->add( std::make_shared< PrintOperatorCsharp >( R"(Hello, world!)" ) );
-    myClassCsharp.add( method, ClassCsharp::PROTECTED_INTERNAL );
-    static std::string CsharpCode = myClassCsharp.compile();
-    return CsharpCode;
-}
-
-std::string CodeGenerationJava::generateProgram() {
-    ClassJava myClass( "MyClassJava" );
-    myClass.add(
-                std::make_shared< MethodJava > ( "testFunc1", "void", 0 ),
-                ClassJava::DEFAULT
-                );
-    myClass.add(
-                std::make_shared< MethodJava >( "testFunc2", "void", MethodJava::STATIC ),
+    myClass->add(
+                genLang->GetMethod( "testFunc2", "void", MethodUnit::STATIC ),
                 ClassJava::PRIVATE
                 );
-    myClass.add(
-                std::make_shared< MethodJava >( "testFunc3", "void", MethodJava::VIRTUAL | MethodJava::FINAL ),
+    myClass->add(
+                genLang->GetMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::FINAL ),
                 ClassJava::PUBLIC
                 );
 
-    auto method = std::make_shared< MethodCpp >( "testFunc4", "void", MethodJava::STATIC );
-    method->add( std::make_shared< PrintOperatorJava >( R"(Hello, world!)" ) );
-    myClass.add( method, ClassJava::PROTECTED );
-    return myClass.compile();
-}*/
+    auto method = genLang->GetMethod( "testFunc4", "void", MethodUnit::STATIC );
+    method->add( genLang->GetPrintOperator( R"(Hello, world!)" ) );
+    myClass->add( method, ClassUnit::PROTECTED );
+    delete genLang;
+    return myClass->compile();
+}
+*/

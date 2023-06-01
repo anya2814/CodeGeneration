@@ -10,6 +10,7 @@
 class CodeGeneration
 {
 public:
+    virtual ~CodeGeneration() = default;
     virtual std::shared_ptr<ClassUnit> GetClass( const std::string& name ) const = 0;
     virtual std::shared_ptr<MethodUnit> GetMethod( const std::string& name, const std::string& returnType, Unit::Flags
                                    flags ) const = 0;
@@ -22,7 +23,7 @@ public:
 class CodeGenerationCpp : public CodeGeneration
 {
 public:
-    explicit CodeGenerationCpp() {}
+    explicit CodeGenerationCpp() { }
     std::shared_ptr<ClassUnit> GetClass( const std::string& name ) const;
     std::shared_ptr<MethodUnit> GetMethod( const std::string& name, const std::string& returnType, Unit::Flags
                                    flags ) const;
@@ -35,7 +36,7 @@ public:
 class CodeGenerationCsharp : public CodeGeneration
 {
 public:
-    explicit CodeGenerationCsharp() {}
+    explicit CodeGenerationCsharp() { }
     std::shared_ptr<ClassUnit> GetClass( const std::string& name ) const;
     std::shared_ptr<MethodUnit> GetMethod( const std::string& name, const std::string& returnType, Unit::Flags
                                    flags ) const;
@@ -48,7 +49,7 @@ public:
 class CodeGenerationJava : public CodeGeneration
 {
 public:
-    explicit CodeGenerationJava() {}
+    explicit CodeGenerationJava() { }
     std::shared_ptr<ClassUnit> GetClass( const std::string& name ) const;
     std::shared_ptr<MethodUnit> GetMethod( const std::string& name, const std::string& returnType, Unit::Flags
                                    flags ) const;

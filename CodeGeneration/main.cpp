@@ -9,11 +9,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    CodeGenerationCpp *prLang = new CodeGenerationCpp();
-
-    std::cout << GenerateProgram::generate(prLang) << std::endl;
-
-    delete prLang;
+    std::cout << GenerateProgram::generate(GenerateProgram::Cpp) << std::endl;
+    std::cout << GenerateProgram::generate(GenerateProgram::Csharp) << std::endl;
+    //std::cout << GenerateProgram::generate(GenerateProgram::Java) << std::endl;
 
     return a.exec();
 }
