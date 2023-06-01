@@ -1,34 +1,25 @@
 #include "generateprogram.h"
 
-std::string GenerateProgram::generate(language prLang) {
-    switch(prLang)
-        case 0:
-            CodeGenerationCpp generate(); break;
-        case 1:
-            CodeGenerationCsharp generate; break;
-        case 2:
-            CodeGenerationJava generate; break;
-        default:
-            throw incorrectLanguage("Incorrect language name or not supported language"); break;
+std::string GenerateProgram::generate(const CodeGeneration *genLang) {
 
-        generate.GetClass( "MyClass" );
-        myClass.add(
-                    generate.GetMethod ( "testFunc1", "void", 0 ),
-                    ClassCpp::PUBLIC
-                    );
-        myClass.add(
-                    generate.GetMethod ( "testFunc2", "void", MethodCpp::STATIC ),
-                    ClassCpp::PRIVATE
-                    );
-        myClass.add(
-                    generate.GetMethod ( "testFunc3", "void", MethodCpp::VIRTUAL | MethodCpp::CONST ),
-                    ClassCpp::PUBLIC
-                    );
+    auto myClass = std::make_shared<ClassUnit>( genLang->GetClass( "MyClass" ) );
+    myClass->add(
+                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc1", "void", 0 ) ),
+                ClassUnit::PUBLIC
+                );
+    myClass->add(
+                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc2", "void", MethodUnit::STATIC ) ),
+                ClassUnit::PRIVATE
+                );
+    myClass->add(
+                std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ) ),
+                ClassCpp::PUBLIC
+                );
 
-        auto method = generate.GetMethod ( "testFunc4", "void", MethodCpp::STATIC );
-        method->add( generate.GetPrintOperator ( R"(Hello, world!\n)" ) );
-        myClass.add( method, ClassCpp::PROTECTED );
-        return myClass.compile();
+    auto method = std::make_shared< MethodUnit >( genLang->GetMethod( "testFunc4", "void", MethodUnit::STATIC ) );
+    method->add( std::make_shared< PrintOperatorUnit >( genLang->GetPrintOperator( R"(Hello, world!\n)" ) ) );
+    myClass->add( method, ClassUnit::PROTECTED );
+    return myClass->compile();
 }
 
 /*std::string CodeGenerationCpp::generateProgram() {

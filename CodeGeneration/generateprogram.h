@@ -8,14 +8,8 @@
 class GenerateProgram
 {
 public:
-     enum language {
-     Cpp = 0,
-     Csharp = 1,
-     Java = 2
-     };
-
-public:
-    static std::string generate(language prLang);
+    // генерирование кода, язык зависит от подаваемого параметра
+    static std::string generate(const CodeGeneration *genLang);
 };
 
 #endif // GENERATEPROGRAM_H

@@ -11,10 +11,12 @@ void ClassUnit::add( const std::shared_ptr< Unit >& unit, Flags flags ) {
        accessModifier = flags;
    }
 
+   // добавляем (например, функцию) в вектор с определенным типом доступа
    m_fields[ accessModifier ].push_back( unit );
 }
 
 void MethodUnit::add( const std::shared_ptr< Unit >& unit, Flags /* flags */ ) {
+    // добавляем (например, оператор) в тело функции
     m_body.push_back( unit );
 }
 

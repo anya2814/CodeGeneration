@@ -3,6 +3,9 @@
 std::string ClassCpp::compile( unsigned int level ) const
 {
     std::string result = generateShift( level ) + "class " + m_name + " {\n";
+
+    // генерируем код для всех добавленных функций
+    // по очереди для каждого модификатора доступа
     for( size_t i = 0; i < ACCESS_MODIFIERS.size(); ++i ) {
         if( m_fields[ i ].empty() ) {
             continue;
