@@ -19,7 +19,7 @@ std::string ClassCpp::compile( unsigned int level ) const
         }
         if (i != ACCESS_MODIFIERS.size() - 1) result += "\n";
         }
-        //else std::cout << "Access modifier \"" << ACCESS_MODIFIERS[i] << "\" is not available for this language." << std::endl;
+        //else std::cout << "Warning: access modifier \"" << ACCESS_MODIFIERS[i] << "\" is not available for this language." << std::endl;
     }
 
     result += generateShift( level ) + "};\n";

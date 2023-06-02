@@ -8,7 +8,9 @@ std::string ClassCsharp::compile( unsigned int level ) const
             continue;
         }
         else if ( ACCESS_MODIFIERS[i] == "" || ACCESS_MODIFIERS[i] == "public" ||
-                 ACCESS_MODIFIERS[i] == "protected" || ACCESS_MODIFIERS[i] == "private" )
+                 ACCESS_MODIFIERS[i] == "protected internal" || ACCESS_MODIFIERS[i] == "internal" ||
+                 ACCESS_MODIFIERS[i] == "protected" || ACCESS_MODIFIERS[i] == "file" ||
+                 ACCESS_MODIFIERS[i] == "private protected" || ACCESS_MODIFIERS[i] == "private" )
         {
         for( const auto& f : m_fields[ i ] ) {
             result += generateShift( level + 1 ) + ACCESS_MODIFIERS[ i ];
@@ -17,7 +19,7 @@ std::string ClassCsharp::compile( unsigned int level ) const
         }
         if (i != ACCESS_MODIFIERS.size() - 1) result += "\n";
         }
-        //else std::cout << "Access modifier \"" << ACCESS_MODIFIERS[i] << "\" is not available for this language." << std::endl;
+        //else std::cout << "Warning: access modifier \"" << ACCESS_MODIFIERS[i] << "\" is not available for this language." << std::endl;
     }
 
     result += generateShift( level ) + "};\n";
@@ -25,7 +27,7 @@ std::string ClassCsharp::compile( unsigned int level ) const
 }
 
 std::string MethodCsharp::compile( unsigned int level ) const {
-    std::string result = generateShift( 0 );
+    std::string result = "";
     if( m_flags & STATIC ) {
         result += "static ";
     } else if( m_flags & VIRTUAL ) {
