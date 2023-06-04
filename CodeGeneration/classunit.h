@@ -17,6 +17,7 @@ public:
      static const std::vector< std::string > ACCESS_MODIFIERS;
 
      explicit ClassUnit( const std::string& name ) : m_name( name ) {
+        m_fields = std::vector< Fields >();
         m_fields.resize( ACCESS_MODIFIERS.size() );
      }
 

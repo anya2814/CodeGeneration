@@ -15,7 +15,9 @@ public:
 public:
     MethodUnit( const std::string& name, const std::string& returnType, Flags
 flags ) :
-        m_name( name ), m_returnType( returnType ), m_flags( flags ) { }
+        m_name( name ), m_returnType( returnType ), m_flags( flags ) {
+        m_body = std::vector< std::shared_ptr< Unit > >();
+    }
 
     void add( const std::shared_ptr< Unit >& unit, Flags /* flags */ = 0 );
     std::string compile( unsigned int level = 0 ) const;

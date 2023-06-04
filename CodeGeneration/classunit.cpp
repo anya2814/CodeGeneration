@@ -14,8 +14,12 @@ void ClassUnit::add( const std::shared_ptr< Unit >& unit, Flags flags ) {
    m_fields[ accessModifier ].push_back( unit );
 }
 
+//using Fields = std::vector< std::shared_ptr< Unit > >;
+//std::vector< Fields > m_fields;
+
 std::string ClassUnit::compile( unsigned int level ) const
 {
+    // здесь появлялся disassembler
     std::string result = generateShift( level ) + "class " + m_name + " {\n";
     for( size_t i = 0; i < ACCESS_MODIFIERS.size(); ++i ) {
         if( m_fields[ i ].empty() ) {

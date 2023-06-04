@@ -2,6 +2,7 @@
 
 void MethodUnit::add( const std::shared_ptr< Unit >& unit, Flags /* flags */ ) {
     m_body.push_back( unit );
+
 }
 
 std::string MethodUnit::compile( unsigned int level ) const {
