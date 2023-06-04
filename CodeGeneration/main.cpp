@@ -34,10 +34,13 @@ int main(/*int argc, char *argv[]*/)
 {
     //QCoreApplication a(argc, argv);
 
-    std::cout << generateProgram() << std::endl;
-    std::cout << generateProgram() << std::endl;
-    std::cout << generateProgram() << std::endl;
-    std::cout << generateProgram() << std::endl;
+    std::string result = generateProgram();
+    std::cout << result << std::endl;
+    std::cout << result << std::endl;
+    std::cout << result << std::endl;
+
+    //std::cout << generateProgram() << std::endl;
+
 
     return 0;//a.exec();
 }
