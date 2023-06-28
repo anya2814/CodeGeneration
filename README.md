@@ -23,3 +23,5 @@ CodeGenerationCsharp - для создания конкретных продук
 CodeGenerationJava - для создания конкретных продуктов для языка Java: ClassJava, MethodJava и PrintOperatorJava.
 
 GenerateProgram - класс, в котором работает клиент.
+
+![Image alt]https://github.com/anya2814/CodeGeneration/blob/master/UML1.png
