@@ -24,4 +24,4 @@ CodeGenerationJava - для создания конкретных продукт
 
 GenerateProgram - класс, в котором работает клиент.
 
-![Image alt]https://github.com/anya2814/CodeGeneration/blob/master/UML1.png
+![Image alt]UML1.png
